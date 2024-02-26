@@ -1,0 +1,26 @@
+.currentPuzzle {
+    margin-left: 50px;
+    padding: 0 20px;
+    background: black;
+    color: white;
+}
+
+::ng-deep .p-button.p-button-icon-only {
+    width: 2rem;
+    padding: 0;
+    margin: 5px;
+    height: 2rem;
+}
+
+::ng-deep .p-toolbar {
+    padding: 0.25rem;
+}
+
+::ng-deep .p-button {
+    padding: 0.25rem;
+}
+
+::ng-deep .p-slider {
+    width: 300px;
+    margin: 0 15px;
+}

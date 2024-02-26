@@ -1,0 +1,13 @@
+.p-panelmenu .p-panelmenu-header > a {
+    padding: 0.5rem;
+}
+.mat-sidenav {
+    width: 360px;
+}
+
+.main {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
