@@ -1,0 +1,9 @@
+{
+    "files.exclude":{ "**/*.js": true,
+                    "**/*.js.map": true
+                },
+    "debug.console.collapseIdenticalLines": false,
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "html.autoCreateQuotes": false,
+    "html.autoClosingTags": false
+}
