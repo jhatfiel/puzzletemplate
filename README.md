@@ -1,13 +1,15 @@
-# Puzzle Template
+# Everybody Codes
 
-`npm install` to initialize node_modules folder
+`npm i --save-dev @types/node` to initialize node_modules folder
 
-Put each puzzle in its own directory, labeled with a number (such as the example `0001`). This will correspond with data files under `data/0001/*.txt`
+run most things using `ts-node a.ts ../../../data/YYYY/DD/input`
 
-Put visualizations for a puzzle in app/visualization/ and reference them in app-routing.module.ts.  If a puzzle doesn't have a visualization, it directs to GenericPuzzle component which will just display the output to the browser window.
+or... (updating) run most things using `npx tsx a.ts ../../../data/YYYY/DD/input.txt`
+
+or... `npx tsx src/aoc aYYYYDD sample.txt` or via the webpage
+
+or... `node --experimental-specifier-resolution=node dist/out-tsc/aoc aYYYYDD input.txt`
 
 `ng serve` for webserver
 
-and `CTRL-SHIFT-B` / `tsc: watch - tsconfig.json` to auto-compile src
-
-`F5` / `CTRL-F5` to run current puzle
+and `CTRL-SHIFT-B` / `tsc: watch - tsconfig.json` for auto-compilation

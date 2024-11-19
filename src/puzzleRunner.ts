@@ -2,9 +2,10 @@ import { readFileSync, appendFileSync } from "fs";
 import { performance } from "perf_hooks";
 
 const classname = process.argv[2];
-let id = classname.substring(1);
+let year = classname.substring(1, 5);
+let day = classname.substring(5, 7);
 
-const dir = `${id}`;
+const dir = `${year}/${day}`;
 const jsfile = `./${dir}/${classname}.js`;
 const datafile = `./data/${dir}/${process.argv[3]}`;
 const benchfile = `./src/${dir}/bench.txt`;
