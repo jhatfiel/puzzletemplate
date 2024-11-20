@@ -20,7 +20,7 @@ import { DividerModule } from 'primeng/divider';
 import { SliderModule } from 'primeng/slider';
 import { PhaserComponent } from './visualization/Phaser.component';
 import { AngularResizeEventModule } from 'angular-resize-event';
-import { a0001Component } from './visualization/0001/a0001';
+// import { a0001Component } from './visualization/0001/a0001';
 
 @NgModule({
   declarations: [
@@ -28,8 +28,7 @@ import { a0001Component } from './visualization/0001/a0001';
     MainComponent,
     NavComponent,
     GenericPuzzleComponent,
-    PhaserComponent,
-    a0001Component
+    PhaserComponent
   ],
   imports: [
     CommonModule,
