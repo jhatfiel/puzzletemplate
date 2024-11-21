@@ -75,7 +75,7 @@ export class NavService {
     }
 
     public getPuzzleLink() {
-        let link = 'https://example.com/';
+        let link = 'https://everybody.codes/event/2024/quests/';
         if (this.id) link += `${this.id}`;
         return link;
     }
