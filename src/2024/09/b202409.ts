@@ -1,7 +1,7 @@
 import { Puzzle } from '../../lib/Puzzle.js';
 
-export class a202409 extends Puzzle {
-    stamps = [1,3,5,10];
+export class b202409 extends Puzzle {
+    stamps = [1,3,5,10,15,16,20,24,25,30];
     amounts: number[];
     max: number;
     matrix: number[][];
@@ -23,9 +23,9 @@ export class a202409 extends Puzzle {
                 else                  m[index+1][r] = Math.min(m[index][r], 1 + m[index+1][r - value]);
             }
         });
-        for (let i=0; i<this.stamps.length; i++) {
-            this.log(m[i].join(','));
-        }
+        // for (let i=0; i<this.stamps.length; i++) {
+        //     this.log(m[i].join(','));
+        // }
     }
 
     _runStep(): boolean {

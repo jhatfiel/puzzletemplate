@@ -1,7 +1,7 @@
 import { Puzzle } from '../../lib/Puzzle.js';
 
-export class a202409 extends Puzzle {
-    stamps = [1,3,5,10];
+export class c202409 extends Puzzle {
+    stamps = [1, 3, 5, 10, 15, 16, 20, 24, 25, 30, 37, 38, 49, 50, 74, 75, 100, 101];
     amounts: number[];
     max: number;
     matrix: number[][];
@@ -23,19 +23,32 @@ export class a202409 extends Puzzle {
                 else                  m[index+1][r] = Math.min(m[index][r], 1 + m[index+1][r - value]);
             }
         });
-        for (let i=0; i<this.stamps.length; i++) {
-            this.log(m[i].join(','));
-        }
+        // for (let i=0; i<this.stamps.length; i++) {
+        //     this.log(m[i].join(','));
+        // }
     }
 
     _runStep(): boolean {
         let moreToDo = this.stepNumber < this.lines.length;
         let n = this.amounts[this.stepNumber-1];
-        let numCoins = this.matrix.at(-1)[n];
-        this.sum += numCoins;
-        this.log(`${n} made using ${numCoins} coins`);
+        let m = Math.floor(n/2);
+
+        let bestCombo = Infinity;
+        while (n - m*2 <= 100) {
+            let num1 = this.matrix.at(-1)[m];
+            let num2 = this.matrix.at(-1)[n-m];
+            if (num1 + num2 < bestCombo) {
+                this.log(`Better! ${m}=${num1} and ${n-m}=${num2}`);
+                bestCombo = num1 + num2;
+            }
+            m--;
+        }
+
+        this.log(`${n} made using ${bestCombo} coins`);
+        this.sum += bestCombo;
         if (!moreToDo) {
             this.result = this.sum.toString();
+            // 151616 length & first is correct
         }
         return moreToDo;
     }
