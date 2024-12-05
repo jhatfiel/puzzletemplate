@@ -1,7 +1,7 @@
 import { Puzzle } from '../../lib/Puzzle.js';
 
-export class a202411 extends Puzzle {
-    termites = ['A'];
+export class b202411 extends Puzzle {
+    termites = ['Z'];
     production: Map<string, string[]>;
     sampleMode(): void { };
 
@@ -10,9 +10,9 @@ export class a202411 extends Puzzle {
     }
 
     _runStep(): boolean {
-        let moreToDo = this.stepNumber < 4;
+        let moreToDo = this.stepNumber < 10;
         this.termites = this.termites.flatMap(c => this.production.get(c));
-        this.log(`${this.stepNumber} ${this.termites.length} (${this.termites.join(',')})`);
+        //this.log(`${this.stepNumber} ${this.termites.length} (${this.termites.join(',')})`);
         if (!moreToDo) {
             this.result = this.termites.length.toString();
         }
