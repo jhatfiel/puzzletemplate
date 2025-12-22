@@ -2,10 +2,10 @@ import { Puzzle } from '../../lib/Puzzle.js';
 
 interface Pair { x: number, y: number}
 
-export class a202412 extends Puzzle {
+export class b202412 extends Puzzle {
     sum = 0;
     segment: Pair[] = []; 
-    target: Pair[] = [];
+    target: {pos: Pair, strength: number}[] = [];
     sampleMode(): void { };
 
     _loadData(lines: string[]) {
@@ -13,23 +13,25 @@ export class a202412 extends Puzzle {
       lines.forEach(line => {
         const match = line.match(/([A-C])/);
         if (match) this.segment[y] = {x: match.index, y};
-        let x = line.indexOf('T');
+        let x = line.search(/[TH]/)
         while (x !== -1) {
-          this.target.push({x, y});
-          x = line.indexOf('T', x+1);
+          this.target.push({pos: {x, y}, strength: line[x] === 'H'?2:1});
+          const pos = line.slice(x+1).search(/[TH]/);
+          if (pos === -1) break;
+          x = x+1+pos;
         }
 
         y--;
       })
 
       console.log(this.segment.filter(s=>s).map(s => `S: ${s.x},${s.y}`));
-      console.log(this.target.map(t => `T: ${t.x},${t.y}`)); // will always be in order, top-left first (lowest x, highest y)
+      console.log(this.target.map(t => `T: ${t.pos.x},${t.pos.y}`)); // will always be in order, top-left first (lowest x, highest y)
     }
 
     _runStep(): boolean {
         const nextTarget = this.target.pop();
         let moreToDo = this.target.length>0;
-        console.log(`Fire at $${nextTarget}`);
+        console.log(`Fire at $${JSON.stringify(nextTarget)}`);
 
         let bestScore = 0;
         let bestSegmentIndex = 0;
@@ -62,14 +64,14 @@ A
           // t.x = s.x + 3p + (s.y-t.y) lets us solve for p, since we know all other values
           // p = (t.x - s.x - s.y + t.y) / 3 (must be div 3)
           const segment = this.segment[i];
-          let power3 = nextTarget.x + nextTarget.y - segment.x - segment.y;
-          console.log(`To hit ${nextTarget} from ${segment} would take power=${power3}/3`);
+          let power3 = nextTarget.pos.x + nextTarget.pos.y - segment.x - segment.y;
+          console.log(`To hit ${JSON.stringify(nextTarget)} from ${JSON.stringify(segment)} would take power=${power3}/3`);
           if (power3 % 3) continue;
           let power = power3/3;
-          let score = i*power;
+          let score = nextTarget.strength*i*power;
 
           if (score > bestScore) {
-            console.log(`New best score: ${score} using power=${power} from segment=${segment}`);
+            console.log(`New best score: ${score} using power=${power} from segment=${JSON.stringify(segment)}`);
             bestScore = score;
             bestSegmentIndex = i;
           }
