@@ -2,7 +2,7 @@ import { Dijkstra } from '../../lib/Dijkstra.js';
 import { Grid, Pair, pair2Str, str2Pair } from '../../lib/Grid.js';
 import { Puzzle } from '../../lib/Puzzle.js';
 
-export class a202413 extends Puzzle {
+export class c202413 extends Puzzle {
   grid: number[][];
   start: Pair;
   end: Pair;
@@ -46,12 +46,20 @@ export class a202413 extends Puzzle {
       ]));
     });
 
-    const paths = dij.pathTo(startStr, endStr);
-    console.log(JSON.stringify(paths));
-
+    const paths = dij.pathToAny(endStr, (node: string) => {const pos = str2Pair(node); return pos.row === 0 || pos.col === 0 || pos.row === this.grid.length-1 || pos.col === this.grid[0].length-1});
+    let distanceMap = dij.distanceTo.get(endStr);
+    let bestDistance = Infinity;
+    console.log(JSON.stringify([...paths]));
+    for (const finalNode of [...paths.keys()]) {
+      let distance = distanceMap.get(finalNode);
+      console.log(`final ${finalNode}: distance=${distance}`)
+      if (distance < bestDistance) {
+        bestDistance = distance;
+      }
+    }
 
     if (!moreToDo) {
-      this.result = dij.distanceTo.get(startStr)?.get(endStr)?.toString();
+      this.result = bestDistance.toString();
     }
     return moreToDo;
   }
